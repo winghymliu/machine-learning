@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11809,16 +11809,6 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>//anaconda/envs/udacity/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
-//anaconda/envs/udacity/lib/python2.7/site-packages/sklearn/learning_curve.py:23: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the functions are moved. This module will be removed in 0.20
-  DeprecationWarning)
-</pre>
-</div>
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
@@ -11861,7 +11851,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
@@ -12033,7 +12023,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Calculate the performance of this model</span>
@@ -12065,7 +12055,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> 0.923</p>
+<p><strong>Answer:</strong> The R2 value 0.923 is high score and successfully captures the variation of the target variable since there is little difference between the true and predicted values.</p>
 
 </div>
 </div>
@@ -12091,14 +12081,14 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="c1"># TODO: Shuffle and split the data into training and testing subsets</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Success</span>
 <span class="k">print</span> <span class="s2">&quot;Training and testing split was successful.&quot;</span>
@@ -12139,7 +12129,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Cross validation helps prevent the algorithm from overfitting to your current training data (which can occur if the training set is small or if many features are used) and helps provide a indiction of its performance when used against a hypothetical validation set.</p>
+<p><strong>Answer: </strong> Cross validation helps prevent the algorithm from overfitting to your current training data (which can occur if the training set is small or if many features are used) and helps provide a indiction of its performance when used against a hypothetical validation set. To do this it is important to only use a certain proportion of your data to train the model and the remainder to test it. If the model trained on the entire data set without a test set to validate it, then the model will score poorly when predicting on new inputs since it has overfitted itself to the existing data.</p>
 
 </div>
 </div>
@@ -13220,7 +13210,7 @@ a6QDFBERERERXSMdoIiIiIiI6BrpAEVERERERNf4L7WMMzVFzZ1VAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> In the second curve with the max_depth of 3, the score of the training curve decreases to approximately 80% as more training points are added. The opposite happens with the testing curve as it increases to approximately the same score as the training curve. More training points should increase the test score as reduces overfitting and provide a more accurate indication of the algorithm's performance and is less prone to false estimations due to outliers in data</p>
+<p><strong>Answer: </strong> In the second curve with the max_depth of 3, the R2 score of the training curve decreases to approximately 0.8 as more training points are added. The opposite happens with the testing curve as it increases to approximately the same score as the training curve. The curve appears to have convereged and flattened to this score after 300+ training points were added. Adding more training points will unlikely improve the performance of the model.</p>
 
 </div>
 </div>
@@ -13692,7 +13682,7 @@ RAwlPRERiRhKeiIiEjH+H9c92SPdrNESAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> 
-A mode suffering from high bias will have a poor training and validation score. Increasing the maximum depth will increase the variance and thus the training scores will increase along with the validation score, however if the variance is too high (e.g max depth of 10) and overfits the traning data then the model will perform worse on the validation data and have a lower validation score.</p>
+A mode; with a max_depth=1 will be suffering from high bias and have a poor training and validation score. Increasing the maximum depth will increase the variance and thus the training scores will increase along with the validation score, however if the variance is too high (e.g max depth of 10) and overfits the traning data then the model will perform worse on the validation data and have a lower validation score. The R2 scores for models with high bias do not improve much an increase in training data and will plateau early. However, models with high variance will keep increasing its R2 score as more training data is added and reach a higher plateau on the graphs.</p>
 
 </div>
 </div>
@@ -13743,7 +13733,7 @@ A mode suffering from high bias will have a poor training and validation score. 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Grid search is a hyper-parameter estaimation technique that uses exhaustive search (can be done in parallel) over a range of parameters. The parameters are applied to the estimation model, perform cross validation and record the results. The GridsearchCV method in sklearn saves the user from having to write their own loops/parralel tasks to go through the parameters they want to test.</p>
+<p><strong>Answer: </strong> Grid search is a hyper-parameter estaimation technique that uses exhaustive search (can be done in parallel) over a range of parameters. The parameters are applied to the estimation model, perform cross validation and record the results. The GridsearchCV method in sklearn saves the user from having to write their own loops/parralel tasks to go through the parameters they want to test. You can control the number of parallel jobs (i.e. how many parameters to do at once) but specifying the amount in the n_jobs parameter, the higher the number the more parameters it will run simulatenously (note specifying a very higher number will use more of your CPU resources and memory).</p>
 
 </div>
 </div>
@@ -13764,7 +13754,7 @@ A mode suffering from high bias will have a poor training and validation score. 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> K-fold cross validation is a technique that ensures all of the data has been used for both training and validation. The data is split into k chunks, one chunk is used as the validation and the remaining chunks are used as training data. The process is repeated until all of the chunks has been used in validation, the scores from each iteration are added up and average.</p>
+<p><strong>Answer: </strong> K-fold cross validation is a technique that ensures all of the data has been used for both training and validation. The data is split into k chunks, one chunk is used as the validation and the remaining chunks are used as training data. The process is repeated until all of the chunks has been used in validation, the scores from each iteration are added up and average. Cross validation is important to prevent overfitting which occurs if you use the model to optimize on the entire data set without having a subset of the data as test data for validation. During cross validation the scores of the training set and the validation set are compared and the model's parameteres are adjusted to ensure it scores well on both.</p>
 
 </div>
 </div>
@@ -13798,9 +13788,18 @@ A mode suffering from high bias will have a poor training and validation score. 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -13986,7 +13985,8 @@ Predicted selling price for Client 3&#39;s home: $896,700.00
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> I would recommend client 1 to sell at 413,700 dollars, client 2 at 227,758.70 dollars and client 3 at 896,700 dollars. The prices seems reasonable based on the current features.</p>
+<p><strong>Answer: </strong> I would recommend client 1 to sell at 413,700 dollars, client 2 at 227,758.70 dollars and client 3 at 896,700 dollars. All the recommended prices fall within the max (1,024,800.00) and min (105,000.00) values that we have calculated earlier in the exercise which means none of these house prices are outside the current boundaries. The mean and median of this data are very close to each other which indicates the data is even distributed around the mean (454,342.94). Client 1 has a price similar to the average/median which means it's price should be common in the dataset whereas predications for client 2 and client 3 could potentially be outliers. It is also almost double the price of client 2 despite the one room difference, which means the neighbourhood poverty level and student teacher ratio plays a stronger weighting on the prices. This is also reinforced by client 3 who has double the rooms of client 2 but is worth 4 times as much.</p>
+<p>From my general intuition, the neighbourhood poverty level is a good indiction of house prices (unless the properties are in a densely populated area where space is scarce) since people with the right 'class' tend to live with each other thus these prices look reasonable.</p>
 
 </div>
 </div>
