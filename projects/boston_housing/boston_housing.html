@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11851,23 +11851,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="k">print</span> <span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -11894,7 +11894,7 @@ Minimum price: $105,000.00
 Maximum price: $1,024,800.00
 Mean price: $454,342.94
 Median price $438,900.00
-Standard deviation of prices: $165,340.28
+Standard deviation of prices: $165,171.13
 </pre>
 </div>
 </div>
@@ -11959,7 +11959,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;r2_score&#39;</span>
@@ -12023,7 +12023,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Calculate the performance of this model</span>
@@ -12055,7 +12055,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> The R2 value 0.923 is high score and successfully captures the variation of the target variable since there is little difference between the true and predicted values.</p>
+<p><strong>Answer:</strong> The R2 value 0.923 is high score and successfully captures the variation of the target variable since there is little difference between the true and predicted values. However we shouldn't trust the model completely yet due the lack of information on the model and the small number of data points.</p>
 
 </div>
 </div>
@@ -12081,7 +12081,7 @@ Standard deviation of prices: $165,340.28
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
@@ -13682,7 +13682,8 @@ RAwlPRERiRhKeiIiEjH+H9c92SPdrNESAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> 
-A mode; with a max_depth=1 will be suffering from high bias and have a poor training and validation score. Increasing the maximum depth will increase the variance and thus the training scores will increase along with the validation score, however if the variance is too high (e.g max depth of 10) and overfits the traning data then the model will perform worse on the validation data and have a lower validation score. The R2 scores for models with high bias do not improve much an increase in training data and will plateau early. However, models with high variance will keep increasing its R2 score as more training data is added and reach a higher plateau on the graphs.</p>
+A model with a max_depth=1 will be suffering from high bias and have a poor training score. Increasing the maximum depth will increase the variance and thus the training scores will increase along with the validation score. However if the variance is too high (e.g max depth of 10), the model will overfit the training data producing a very high training score whilst the validation score is much lower since the model is too optimized on the training set. In the graph with the highest depth, the gap between the too scores narrowed initially with the increase in training points but a large gap remains even after 200 training points.</p>
+<p>The R2 scores for models with high bias do not improve much an increase in training data and will plateau early. However, models with high variance will keep increasing its R2 score as more training data is added and reach a higher plateau on the graphs.</p>
 
 </div>
 </div>
