@@ -12057,7 +12057,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong>  I suspect the first customer to be a supermarket that specializes in frozen food due to its high frozen costs and very low cleaning (detergent and paper costs). Customer 2 is quite likely to be a coffee shop/cafe since it spends it's majority of expenses on milk followed by fresh and grocery ingredients, it's large paper cost is probably used for cups. Customer 3 could be a dessert cafe with it's expenses going to groceries and milk followed by detergent for cleaning.</p>
+<p><strong>Answer:</strong>  I suspect the first customer to be a supermarket that specializes in frozen food due to its high frozen costs (mean is 3071 and median is 1526) and very low cleaning (detergent and paper costs with mean of w881 and median of 816).</p>
+<p>Customer 2 is quite likely to be a coffee shop/cafe since it spends it's majority of expenses on milk followed by fresh and grocery ingredients, it's large paper cost is probably used for cups.</p>
+<p>Customer 3 could be a dessert cafe with it's expenses going to groceries and milk followed by detergent for cleaning. In fact it's expenditure on groceries and milk is the highest in the data set.</p>
 
 </div>
 </div>
@@ -12084,30 +12086,30 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Make a copy of the DataFrame, using the &#39;drop&#39; function to drop the given feature</span>
-<span class="n">new_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Delicatessen&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Delicatessen&#39;</span><span class="p">]</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="c1"># TODO: Split the data into training and testing sets using the given feature as the target</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
-<span class="c1"># TODO: Create a decision tree regressor and fit it to the training set</span>
-<span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;first test&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;first label&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;prediction&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="c1"># TODO: Report the score of the prediction using the testing set</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">)</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">selected_feature</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+    <span class="n">new_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">selected_feature</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">selected_feature</span><span class="p">]</span>
+
+    <span class="c1"># TODO: Split the data into training and testing sets using the given feature as the target</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+    <span class="c1"># TODO: Create a decision tree regressor and fit it to the training set</span>
+    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># TODO: Report the score of the prediction using the testing set</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Score for &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">selected_feature</span><span class="p">))</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12120,27 +12122,18 @@ div#notebook {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>first test
-Fresh               1537
-Milk                3748
-Grocery             5838
-Frozen              1859
-Detergents_Paper    3381
-Name: 208, dtype: int64
-first label
-806
-prediction
-[1468]
-Score
-0.0
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>//anaconda/envs/udacity/lib/python2.7/site-packages/sklearn/utils/validation.py:395: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
-  DeprecationWarning)
+<pre>Score for Fresh
+-0.252469807688
+Score for Milk
+0.365725292736
+Score for Grocery
+0.602801978878
+Score for Frozen
+0.253973446697
+Score for Detergents_Paper
+0.728655181254
+Score for Delicatessen
+-11.6636871594
 </pre>
 </div>
 </div>
@@ -12165,7 +12158,7 @@ Score
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong></p>
+<p><strong>Answer:</strong> I've ran the decision tree regressor acrosss all the features and interrestingly the scores vary a lot. Detergents_Paper had a very decent score of 0.72 and with some optimizations this can be a successful label using the other features to form the predictions. This leads me to assume that there's are patterns in spending for detergents. On the other side of the spectrum, delicatessen and fresh had negative scores which suggests there are no correlations within the other features that can be used to predict these labels. They are potentially not needed to predict the spending habits of customers due to the lack of correlation.</p>
 
 </div>
 </div>
@@ -13683,7 +13676,7 @@ There are some pairs which show a degree of correlation:
 Grocery - Milk,
 Detergents - Milk,
 Grocery - Detergents,
-I picked the feature Delicatessen as my label and it didn't show any obvious correlation between the other particular features. The majority of the data points lie to the lower end of the graph (negatively skewed) and are not normally distributed. I believe the correlation patterns would be easier to identify if we normalized the data and pass it into a sigmoid function to avoid the large effects of the outliers.</p>
+I picked the feature Delicatessen as my label and it didn't show any obvious correlation between the other particular features. The majority of the data points lie to the lower end of the graph (positively skewed) and are not normally distributed. I believe the correlation patterns would be easier to identify if we normalized the data and pass it into a sigmoid function to avoid the large effects of the outliers.</p>
 
 </div>
 </div>
@@ -13715,7 +13708,7 @@ I picked the feature Delicatessen as my label and it didn't show any obvious cor
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Scale the data using the natural logarithm</span>
@@ -13727,6 +13720,11 @@ I picked the feature Delicatessen as my label and it didn't show any obvious cor
 
 <span class="c1"># Produce a scatter matrix for each pair of newly-transformed features</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">log_data</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">diagonal</span> <span class="o">=</span> <span class="s1">&#39;kde&#39;</span><span class="p">);</span>
+
+<span class="c1">#boxcox</span>
+<span class="c1">#from scipy.stats import boxcox</span>
+<span class="c1">#bc_data = data.apply(lambda x: boxcox(x)[0], axis=0)</span>
+<span class="c1">#pd.scatter_matrix(bc_data, alpha = 0.3, figsize = (14,8), diagonal = &#39;kde&#39;);</span>
 </pre></div>
 
 </div>
@@ -17926,7 +17924,9 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> There are data points with multiple features that are outliers (for example 75 and 154) but I don't think they should be removed from the data set since data will always have outliers and these don't appear to skew the data greatly. I have however, removed data points which have far outliers that probably skew the data greatly.</p>
+<p><strong>Answer:</strong> There are data points with multiple features that are outliers (for example 75 and 154) but I don't think they should be removed from the data set.</p>
+<p>Outliers can be removed if you feel there's a high probability that there was an issue with the sample (i.e. an incorrect measurement or data input error). Outliers can also be dropped if it creates a significant asociation, i.e. it creates a relationship by itself between X and Y.</p>
+<p>I have however, removed data points which have far outliers that probably skew the data greatly because they are more than double the typical threshold of an outlier. The data will be heavily skewed because the distribution is based on the mean.</p>
 
 </div>
 </div>
@@ -18320,9 +18320,21 @@ SUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Both PC1 and PC2 have shown there is a large degree of variance between certain features in the data set. PC1 have highlighted 2 features which a positive correlation to the principle component compared four which are moving in the opposite directions. All of the features but one in PC2 are negatively correlated to the principle component but 2 features have very different variance with each other compared to the other 3. From PC1, PC2 and PC3, it's clear there is hardly any varaince between Fresh and Frozen and between Milk and Grocery.</p>
-<p>PC3 is the most useful in identifying the purchase of fresh and frozen or delicatessen products as they correlated in opposite ways and the the PC has no effect on the other features. Hence an increase in PC3 means a larger increase in fresh products whereas a decrease shows an increase in delicatessen products.</p>
-<p>Increases in PC4 suggests a larger increase in purchases of Milk with a slight increase in groceries, a decreases shows an increase in purchasing of detergent paper.</p>
+<h3 id="Observation">Observation<a class="anchor-link" href="#Observation">&#182;</a></h3><p>After applying a natural logarithm scaling to the data, the distribution of each feature should appear much more normal. For any pairs of features you may have identified earlier as being correlated, observe here whether that correlation is still present (and whether it is now stronger or weaker than before).</p>
+<p>Run the code below to see how the sample data has changed after having the natural logarithm applied to it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Answer:</strong> 
+The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0.7268. The total variance across all the dimensions is 1, therefore the first two dimensions accounts for 72.68% of all the data. What this is means is the first two dimensions have the strongest eigenvalues and explains most of the correlations (if any) within the data.</p>
+<p>PC1 has strong correlation with Milk, Grocery and Detergents/Paper due to the large negative feature weights. Moving along this PC will lead to a decrease in spending on all 3 features. This correlation is confirmed in the biplot below as you can see the eigenvectors of these features point in a similar direction.</p>
+<p>PC2 has strong negative feature weights on Fresh, Frozen and Delicatessen similar to PC3 except for Delicatessen which is negatively correlated. PC4 has strong feature weights on Fresh and Frozen features in opposite directions.</p>
 
 </div>
 </div>
@@ -19615,7 +19627,7 @@ RU5ErkJggg==
 <p><strong>Answer:</strong> 
 The K-means algorithm is fast, very simple and easy to implement and interpret the clustering results. However, K means does make a few assumptions on the data set. The first is assuming the data distribution of each feature is spherical which also less flexible on datasets which do not match that shape. GMM on the other hand is able to stretch to accommodate the dataset and have no structural constraints, clusters can take more oval shaped than spherical.</p>
 <p>Similarly, K means is sensitive to outliers causing the clustering area to increase proportionally with the majority of the data. GMM however, is based on uniform distributions of data giving outliers a lower likelihood of classification. GMM also soft assigns the data points unlike K means, which provides greater flexibility in classification allowing mixed memberships of the features (i.e. overlapping clusters). GMM will also guarantee to converge through expectation maximization on the likelihood of the features whereas K means has to randomize the starting location of the centroids and take the one to perform the best.</p>
-<p>Given the current observation of the data, I feel GMM will be more appropriate especially since the features have a tendency of being normally distributed (which is a prerequisite of using GMM). The PCA results have also suggested that some of the features do not necessarily fall into very distinct categories and there is a degree of overlap. One example was dimension 2 where fresh and frozen both had a negative correlation with the PC but in dimension 3 they had opposing correlations. Looking at the feature scaling matrix earlier on, the data does not appear spherical in most places and I think a flexible cluster will more accurately represent the data set.</p>
+<p>Given the current observation of the data, I feel GMM will be more appropriate especially since the features have a tendency of being normally distributed (which is a prerequisite of using GMM). The PCA results have also suggested that some of the features do not necessarily fall into very distinct categories and there is a degree of overlap. One example was dimension 2 where fresh and frozen both had a negative correlation with the PC but in dimension 3 they had opposing correlations. Looking at the feature scaling matrix earlier on, the data does not appear spherical in most places and I think a flexible cluster will more accurately represent the data set. GMM is also the fastest algorithm for learning mixed models.</p>
 
 </div>
 </div>
@@ -20496,7 +20508,8 @@ AAB6DoUQAAAAgJ5DIQQAAACg5/z/LM4oDAzXuZgAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Segement 0 matches one of my initial predictions of a coffee shop with a high expenditure on milk and also groceries and detergents. Segement 1 doesn't match anything I predicted initially but I'd assume it'd be along the lines of a supermarket due to it's large expense on fresh goods and an even spread of other things.</p>
+<p><strong>Answer:</strong> Segement 0 matches one of my initial predictions of a coffee shop with a high expenditure on milk (compared to the mean 5796 and median 3627) and also groceries (mean 7951, median 4755) and detergents (mean 4767, median 816).</p>
+<p>Segement 1 doesn't match anything I predicted initially but I'd assume it'd be along the lines of a supermarket due to it's large expense on fresh goods and an even spread of other things. The median of fresh goods is 8504.</p>
 
 </div>
 </div>
