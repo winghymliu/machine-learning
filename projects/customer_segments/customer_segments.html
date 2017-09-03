@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11830,7 +11830,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display a description of the dataset</span>
@@ -11957,7 +11957,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Select three indices of your choice you wish to sample from the dataset</span>
@@ -12086,7 +12086,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Make a copy of the DataFrame, using the &#39;drop&#39; function to drop the given feature</span>
@@ -12158,7 +12158,9 @@ Score for Delicatessen
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> I've ran the decision tree regressor acrosss all the features and interrestingly the scores vary a lot. Detergents_Paper had a very decent score of 0.72 and with some optimizations this can be a successful label using the other features to form the predictions. This leads me to assume that there's are patterns in spending for detergents. On the other side of the spectrum, delicatessen and fresh had negative scores which suggests there are no correlations within the other features that can be used to predict these labels. They are potentially not needed to predict the spending habits of customers due to the lack of correlation.</p>
+<p><strong>Answer:</strong> In my code I have ran the regressor all the features in the dataset and obtained their R scores. A positive R score indicates the feature can be predicted from the other features whereas a negative score means the model has failed to fit and the selected feature cannot be inferred by the other features.</p>
+<p>The score is important because it gives us an indication of how much new information the selected feature brings to our predictor. A feature that cannot be inferred by the other features means it is completely unrelated to the other features and brings completely new information for our predictor for customer spending habits.</p>
+<p>Hence in our results, delicatessen and fresh are the most valuable features to include in our data set whereas detergents and groceries brings in less information to our predictor.</p>
 
 </div>
 </div>
@@ -12175,11 +12177,13 @@ Score for Delicatessen
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a scatter matrix for each pair of features in the data</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">diagonal</span> <span class="o">=</span> <span class="s1">&#39;kde&#39;</span><span class="p">);</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -12189,6 +12193,27 @@ Score for Delicatessen
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>                     Fresh      Milk   Grocery    Frozen  Detergents_Paper  \
+Fresh             1.000000  0.100510 -0.011854  0.345881         -0.101953   
+Milk              0.100510  1.000000  0.728335  0.123994          0.661816   
+Grocery          -0.011854  0.728335  1.000000 -0.040193          0.924641   
+Frozen            0.345881  0.123994 -0.040193  1.000000         -0.131525   
+Detergents_Paper -0.101953  0.661816  0.924641 -0.131525          1.000000   
+Delicatessen      0.244690  0.406368  0.205497  0.390947          0.069291   
+
+                  Delicatessen  
+Fresh                 0.244690  
+Milk                  0.406368  
+Grocery               0.205497  
+Frozen                0.390947  
+Detergents_Paper      0.069291  
+Delicatessen          1.000000  
+</pre>
+</div>
+</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -13677,6 +13702,7 @@ Grocery - Milk,
 Detergents - Milk,
 Grocery - Detergents,
 I picked the feature Delicatessen as my label and it didn't show any obvious correlation between the other particular features. The majority of the data points lie to the lower end of the graph (positively skewed) and are not normally distributed. I believe the correlation patterns would be easier to identify if we normalized the data and pass it into a sigmoid function to avoid the large effects of the outliers.</p>
+<p>We can also see the correlation as a figure in the table above. The figures shows that both Grocery and Detergent have a large amount of correlation between each other and are positively correlated with most other features. This coincides with our anaylsis earlier with the R^2 scores that both these features can be inferred from the other features here. Delicatessen had a negative R^2 score in the earlier analysis and is positively correlated with the other features, although the correlation is low and in most cases, close to 0 in correlation.</p>
 
 </div>
 </div>
@@ -13708,7 +13734,7 @@ I picked the feature Delicatessen as my label and it didn't show any obvious cor
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Scale the data using the natural logarithm</span>
@@ -17162,7 +17188,7 @@ H41Go9FoNBqNRrMq+P8BgiKWD2uC/EAAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the log-transformed sample data</span>
@@ -17253,7 +17279,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># For each feature find the data points with extreme high or low values</span>
@@ -17924,9 +17950,10 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> There are data points with multiple features that are outliers (for example 75 and 154) but I don't think they should be removed from the data set.</p>
+<p><strong>Answer:</strong> There are data points with multiple features that are outliers (65, 66, 75, 128, 154) but I don't think they should be removed from the data set.</p>
 <p>Outliers can be removed if you feel there's a high probability that there was an issue with the sample (i.e. an incorrect measurement or data input error). Outliers can also be dropped if it creates a significant asociation, i.e. it creates a relationship by itself between X and Y.</p>
 <p>I have however, removed data points which have far outliers that probably skew the data greatly because they are more than double the typical threshold of an outlier. The data will be heavily skewed because the distribution is based on the mean.</p>
+<p>Outliers also have an negative impact on the PCA as it inflates the variance causing the algorithm to calculate high eigenvalues but produce principle components that aren't effective in reducing information loss. Clustering is also negatively impacted as it causes clusters to have a low silouhette score despite the majority of the datapoints being strongly attached to it's assigned clusters. This is because the silouhette score is based on an average of each cluster's datapoints (distance from it's assigned cluster centroid vs the nearest neighbouring one).</p>
 
 </div>
 </div>
@@ -17958,7 +17985,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply PCA by fitting the good data with the same number of dimensions as features</span>
@@ -18332,9 +18359,10 @@ SUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> 
-The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0.7268. The total variance across all the dimensions is 1, therefore the first two dimensions accounts for 72.68% of all the data. What this is means is the first two dimensions have the strongest eigenvalues and explains most of the correlations (if any) within the data.</p>
+The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0.7268. The total variance across all the dimensions is 1, therefore the first two dimensions accounts for 72.68% of all the data. What this is means is the first two dimensions have the strongest eigenvalues and explains most of the correlations (if any) within the data. If we extend to 4 dimensions, the total variance 0.9312 which covers nearly all the data at 93.12%.</p>
 <p>PC1 has strong correlation with Milk, Grocery and Detergents/Paper due to the large negative feature weights. Moving along this PC will lead to a decrease in spending on all 3 features. This correlation is confirmed in the biplot below as you can see the eigenvectors of these features point in a similar direction.</p>
-<p>PC2 has strong negative feature weights on Fresh, Frozen and Delicatessen similar to PC3 except for Delicatessen which is negatively correlated. PC4 has strong feature weights on Fresh and Frozen features in opposite directions.</p>
+<p>PC2 has strong feature weights on Fresh, Frozen and Delicatessen similar to PC3. PC4 has strong feature weights on Fresh and Frozen features.</p>
+<p>We can analyse the feature weights of each PC to understand what sets of data can be seperated. Since PC1 has high feature weights on Milk, Gorcery and Detergents we can use this to seperate customers that are likely to have high spending in these categories, an example would be a restaurant. For PC2 we have large weights on fresh, frozen and delicatessen which could represent a grocers. PC3 has very similar properties to PC2 with the exception of a higher weight on detergents, this could mean it's a supermarket as it sells similar goods to a grocers.  PC4 has high weights on fresh and frozen which suggests it's a wholeseller for foods only or something like a fish market which has both frozen and non-frozen fresh seafood.</p>
 
 </div>
 </div>
@@ -18351,7 +18379,7 @@ The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after having a PCA transformation applied</span>
@@ -18379,32 +18407,36 @@ The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0
       <th>Dimension 3</th>
       <th>Dimension 4</th>
       <th>Dimension 5</th>
+      <th>Dimension 6</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>3.0017</td>
-      <td>-1.9821</td>
-      <td>-1.8690</td>
-      <td>0.9272</td>
-      <td>0.0252</td>
+      <td>2.6167</td>
+      <td>-2.7744</td>
+      <td>-0.2796</td>
+      <td>-1.8876</td>
+      <td>0.7776</td>
+      <td>0.0319</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-4.3134</td>
-      <td>-1.8735</td>
-      <td>1.0716</td>
-      <td>0.8835</td>
-      <td>-0.6840</td>
+      <td>-4.3687</td>
+      <td>-0.9970</td>
+      <td>1.2295</td>
+      <td>1.1107</td>
+      <td>1.0961</td>
+      <td>-0.7092</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-5.1887</td>
-      <td>-1.8161</td>
-      <td>0.8459</td>
-      <td>0.4666</td>
-      <td>0.3044</td>
+      <td>-5.4333</td>
+      <td>-1.4656</td>
+      <td>0.4766</td>
+      <td>0.8578</td>
+      <td>0.4932</td>
+      <td>0.3009</td>
     </tr>
   </tbody>
 </table>
@@ -18435,7 +18467,7 @@ The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply PCA by fitting the good data with only two dimensions</span>
@@ -18468,7 +18500,7 @@ The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after applying PCA transformation in two dimensions</span>
@@ -18535,7 +18567,7 @@ The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Create a biplot</span>
@@ -18550,11 +18582,11 @@ The first two dimensions have the variance 0.4618 and 0.2650 which in total is 0
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[51]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[36]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11f8e4f90&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1112dd710&gt;</pre>
 </div>
 
 </div>
@@ -19655,7 +19687,7 @@ The K-means algorithm is fast, very simple and easy to implement and interpret t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply your clustering algorithm of choice to the reduced data </span>
@@ -19679,7 +19711,7 @@ The K-means algorithm is fast, very simple and easy to implement and interpret t
     <span class="n">sample_preds</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pca_samples</span><span class="p">)</span>
 
     <span class="c1"># TODO: Calculate the mean silhouette coefficient for the number of clusters chosen</span>
-    <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;mahalanobis&#39;</span><span class="p">)</span>
     <span class="k">print</span> <span class="s1">&#39;Cluster size: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; Score: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 </pre></div>
 
@@ -19693,25 +19725,25 @@ The K-means algorithm is fast, very simple and easy to implement and interpret t
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Cluster size: 20 Score: 0.299872375673
-Cluster size: 19 Score: 0.299042757319
-Cluster size: 18 Score: 0.299459250349
-Cluster size: 17 Score: 0.309214756816
-Cluster size: 16 Score: 0.306186793902
-Cluster size: 15 Score: 0.322511060119
-Cluster size: 14 Score: 0.321988214156
-Cluster size: 13 Score: 0.323783411016
-Cluster size: 12 Score: 0.32131690134
-Cluster size: 11 Score: 0.304830236293
-Cluster size: 10 Score: 0.310770257634
-Cluster size: 9 Score: 0.313384500044
-Cluster size: 8 Score: 0.336186180455
-Cluster size: 7 Score: 0.326185273745
-Cluster size: 6 Score: 0.297074718639
-Cluster size: 5 Score: 0.283190121341
-Cluster size: 4 Score: 0.325899118966
-Cluster size: 3 Score: 0.392330081546
-Cluster size: 2 Score: 0.421534957541
+<pre>Cluster size: 20 Score: 0.288972538239
+Cluster size: 19 Score: 0.28510832928
+Cluster size: 18 Score: 0.281255807354
+Cluster size: 17 Score: 0.282134573095
+Cluster size: 16 Score: 0.274913733282
+Cluster size: 15 Score: 0.305206611809
+Cluster size: 14 Score: 0.308401288233
+Cluster size: 13 Score: 0.312263549033
+Cluster size: 12 Score: 0.307573643494
+Cluster size: 11 Score: 0.292005551741
+Cluster size: 10 Score: 0.289992812201
+Cluster size: 9 Score: 0.286889941757
+Cluster size: 8 Score: 0.311142397009
+Cluster size: 7 Score: 0.304451739131
+Cluster size: 6 Score: 0.302999136699
+Cluster size: 5 Score: 0.302692083225
+Cluster size: 4 Score: 0.318163242218
+Cluster size: 3 Score: 0.356659073276
+Cluster size: 2 Score: 0.375880910978
 </pre>
 </div>
 </div>
@@ -20602,7 +20634,7 @@ Sample point 2 predicted to be in Cluster 0
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> Changing a delivery service from 5 days to 3 days a week will benefit customers who rely more on a frequent delivery service for their products. Hence customers who have require produce that has a shorter shelf life are in more demand of this service. Products with the shortest shelf life are milk, fresh and groceries which can expire in days whereas detergents, frozen and delicatessen products will have much longer shelf life and some can last for months.</p>
-<p>The company can use the segements to determine which customers are likely to have a greater expenditure from short shelf live products and hence benefit more from the shorter delivery interval (i.e. segement 0). To perform the A/B testing, identify the customers that are predicted to be segment 0. Randomly the population into 2 halves, have one half keep the current delivery interval and for the other half increase the delivery frequency to 3 days a week. Analyze the overall expenditure after a certain period (perhaps a month to allow customers to adapt to the new delivery model) and see if this change has increased business.</p>
+<p>The company can use the segements to determine which customers are likely to have a greater expenditure from short shelf live products and hence benefit more from the shorter delivery interval (i.e. segement 0). To perform the A/B testing, identify the customers that are predicted to be segment 0. Take a random sample (large enough for significant results) and then split it into 2 halves, have one half keep the current delivery interval and for the other half increase the delivery frequency to 3 days a week. Analyze the overall expenditure after a certain period (perhaps a month to allow customers to adapt to the new delivery model) and see if this change has increased business.</p>
 
 </div>
 </div>
@@ -20642,7 +20674,7 @@ Sample point 2 predicted to be in Cluster 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the clustering results based on &#39;Channel&#39; data</span>
