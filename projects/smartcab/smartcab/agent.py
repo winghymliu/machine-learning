@@ -18,11 +18,12 @@ class LearningAgent(Agent):
         self.Q = dict()          # Create a Q-table which will be a dictionary of tuples
         self.epsilon = epsilon   # Random exploration factor
         self.alpha = alpha       # Learning factor
-
+        self.gamma = 1
         ###########
         ## TO DO ##
         ###########
         # Set any additional class parameters as needed
+        self.trial_number = 0
 
     # Personal note: function resets the destination to the new one during a new trial
     def reset(self, destination=None, testing=False):
@@ -43,9 +44,18 @@ class LearningAgent(Agent):
             print '-------------------------Testing reseting ep and alpha'
             self.epsilon = 0
             self.alpha = 0
+            self.trial_number = 0
         else:
             print '------------------------------Not testing setting decay'
+            self.trial_number += 1
+            #self.epsilon -= 0.05
+            #self.epsilon -= 0.0001
             self.epsilon -= 0.001
+
+            #self.epsilon = 1/(self.trial_number**2) #not enough trials
+            #self.epsilon = 0.998 ** self.trial_number #298 trials
+            #self.epsilon = math.exp(-0.74 * self.trial_number)
+            #self.epsilon = 1 * (math.exp(self.trial_number) / (math.exp(self.trial_number) +1))
             print self.epsilon
 
         return None
@@ -222,14 +232,14 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, log_metrics=True, update_delay=0.01, optimized=False)
+    sim = Simulator(env, log_metrics=True, update_delay=0.01, optimized=True)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10)
+    sim.run(n_test=50)
 
 
 if __name__ == '__main__':
